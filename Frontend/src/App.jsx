@@ -1,17 +1,16 @@
-import { React } from 'react'
-
-import '../src/index.css'
+import React from 'react';
+import Navbar from './components/layout/navbar';
+import Hero from './components/section/hero';
 
 function App() {
-  
-
   return (
-    <>
-        <h1 className="text-3xl font-semibold text-center underline">
-      Hello world!
-    </h1>
-    </>
-  )
+    <div className="min-h-screen bg-black">
+      <Navbar />
+      <main>
+        {/* <Hero /> */}
+      </main>
+    </div>
+  );
 }
 
-export default App
+export default App;

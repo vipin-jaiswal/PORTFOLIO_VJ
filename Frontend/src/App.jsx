@@ -1,13 +1,14 @@
 import React from 'react';
 import Navbar from './components/layout/navbar';
-import Hero from './components/section/hero';
+import Hero from './components/section/Hero';
 
 function App() {
   return (
     <div className="min-h-screen bg-black">
+    
       <Navbar />
       <main>
-        {/* <Hero /> */}
+        <Hero />
       </main>
     </div>
   );

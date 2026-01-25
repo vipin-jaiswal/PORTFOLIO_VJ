@@ -1,6 +1,11 @@
 import React from 'react';
 import Navbar from './components/layout/navbar';
-import Hero from './components/section/Hero';
+import Hero from './components/section/Home';
+import About from './components/section/About';
+import Skills from './components/section/Skills';
+import Project from './components/section/Project';
+import Contect from './components/section/contect';
+import Footer from './components/layout/footer';
 
 function App() {
   return (
@@ -9,7 +14,13 @@ function App() {
       <Navbar />
       <main>
         <Hero />
+        <About />
+        <Skills />
+        <Project />
+        <Contect />
       </main>
+      <Footer />
+
     </div>
   );
 }

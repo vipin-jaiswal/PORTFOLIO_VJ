@@ -90,8 +90,8 @@ const Navbar = () => {
                     px-5 py-2 rounded-full cursor-pointer transition-all duration-300 ease-out
                     font-medium text-sm tracking-wide
                     ${isActive 
-                      ? 'bg-gradient-to-r from-rose-500 via-purple-500 to-blue-500 text-white shadow-lg shadow-purple-500/25 scale-105' 
-                      : 'text-gray-400 hover:text-white hover:bg-white/10 hover:shadow-inner'
+                      ? ' text-gray-400 hover:text-white shadow-purple-500/25 scale-105 hover:bg-white/10 hover:shadow-inner' 
+                      : 'text-gray-400 hover:text-white shadow-purple-500/25 scale-105 hover:bg-white/10 hover:shadow-inner'
                     }
                   `}
                 >

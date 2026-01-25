@@ -5,10 +5,10 @@ import RightsideCard from '../ui/Card';
 // Importing the image from the assets folder
 
 
-const Hero = () => {
+const Home = () => {
   return (
    
-    <section className="h-dvh max-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white px-6 overflow-hidden relative">
+    <section id="home" className="h-dvh max-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white px-6 overflow-hidden relative">
       
       {/* Background Gradient Blurs */}
       <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-900/30 rounded-full blur-[100px]" />
@@ -65,4 +65,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default Home;

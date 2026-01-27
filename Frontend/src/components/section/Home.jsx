@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowRight, MessageCircle } from 'lucide-react'; 
 import RightsideCard from '../ui/Card';
+import Resume from '../../data/resume/RESUME (10).pdf';
 
 // Importing the image from the assets folder
 
@@ -8,11 +9,11 @@ import RightsideCard from '../ui/Card';
 const Home = () => {
   return (
    
-    <section id="home" className="h-dvh max-h-dvh flex items-center justify-center bg-[#0a0a0a] text-white px-6 overflow-hidden relative">
+    <section id="home" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
       
       {/* Background Gradient Blurs */}
-      <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-purple-900/30 rounded-full blur-[100px]" />
-      <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-rose-900/20 rounded-full blur-[100px]" />
+      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20 dark:opacity-5" />
+      
 
       <div className="container  pt-8 mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center relative z-10 h-full">
         
@@ -40,8 +41,10 @@ const Home = () => {
 
           {/* Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 md:gap-6 pt-4">
-            <button className="px-8 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-semibold transition-all shadow-[0_0_20px_rgba(225,29,72,0.4)] flex items-center gap-2 group">
-              SEE PORTFOLIO
+            <button 
+              onClick={() => window.open(Resume, '_blank')}
+              className="px-8 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-semibold transition-all shadow-[0_0_20px_rgba(225,29,72,0.4)] flex items-center gap-2 group">
+              See Resume
               <div className="bg-white/20 rounded-full p-1 group-hover:bg-white/30 transition-colors">
                  <ArrowRight size={16} />
               </div>

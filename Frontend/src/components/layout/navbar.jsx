@@ -17,6 +17,7 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+  
 
   const handleNavClick = (id) => {
     const section = document.getElementById(id);

@@ -1,68 +1,81 @@
-import React from 'react';
-import { ArrowRight, MessageCircle } from 'lucide-react'; 
-import RightsideCard from '../ui/Card';
-import Resume from '../../data/resume/RESUME (10).pdf';
-
-// Importing the image from the assets folder
-
+import React from "react";
+import { ArrowRight, MessageCircle } from "lucide-react";
+import RightsideCard from "../ui/Card";
+import Resume from "../../data/resume/RESUME (10).pdf";
 
 const Home = () => {
   return (
-   
-    <section id="home" className="py-24 bg-white dark:bg-slate-950 relative overflow-hidden">
+    <section
+      id="home"
+      className="relative py-24 bg-slate-950 overflow-hidden"
+    >
+      {/* Cool Background Gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 opacity-90" />
       
-      {/* Background Gradient Blurs */}
-      <div className="absolute inset-0 bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:20px_20px] opacity-20 dark:opacity-5" />
-      
+      {/* Soft Grid Pattern */}
+      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] 
+      [background-size:20px_20px] opacity-20" />
 
-      <div className="container  pt-8 mx-auto max-w-6xl grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-20 items-center relative z-10 h-full">
+      <div className="container mx-auto max-w-6xl px-6 grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative z-10">
         
-        {/* LEFT SIDE: Text Content */}
-        <div className="text-center pt-8 md:text-left space-y-6 animate-fade-in-up flex flex-col justify-center">
-          <h3 className="text-sm md:text-base pt-4  font-medium tracking-[0.2em] text-gray-400 uppercase">
+        {/* LEFT SIDE */}
+        <div className="space-y-6 text-center md:text-left">
+          
+          <h3 className="text-sm tracking-widest uppercase text-blue-400 font-medium">
             Hello There, Welcome to my site
           </h3>
-          
-          <h1 className="text-3xl md:text-7xl font-bold leading-tight">
-            I'm <span className="text-white">Vipin Jaiswal</span>
+
+          <h1 className="text-4xl md:text-6xl font-extrabold leading-tight text-white">
+            I'm <span className="text-blue-400">Vipin Jaiswal</span>
           </h1>
-          
-          <h2 className="text-2xl md:text-5xl font-bold leading-tight">
-            A <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-pink-600">
+
+          <h2 className="text-2xl md:text-4xl font-bold leading-snug text-gray-300">
+            A{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Full Stack Developer
-            </span>
-            <br />
-            <span className="text-white">& UI/UX Designer</span>
+            </span>{" "}
+            <br className="hidden md:block" />
+            & UI/UX Designer
           </h2>
-          
-          <p className="text-gray-400 text-base md:text-lg max-w-lg mx-auto md:mx-0 leading-relaxed">
-            I build interactive, high-performance websites and applications with a focus on seamless user experiences.
+
+          <p className="text-gray-400 max-w-lg mx-auto md:mx-0 text-base md:text-lg leading-relaxed">
+            I build interactive, high-performance websites and applications
+            with a focus on seamless user experiences and scalable architecture.
           </p>
 
           {/* Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 md:gap-6 pt-4">
-            <button 
-              onClick={() => window.open(Resume, '_blank')}
-              className="px-8 py-3 rounded-full bg-rose-600 hover:bg-rose-700 text-white font-semibold transition-all shadow-[0_0_20px_rgba(225,29,72,0.4)] flex items-center gap-2 group">
-              See Resume
-              <div className="bg-white/20 rounded-full p-1 group-hover:bg-white/30 transition-colors">
-                 <ArrowRight size={16} />
-              </div>
-            </button>
+          <div className="flex flex-col sm:flex-row items-center md:items-start gap-5 pt-4">
             
-            <button className="px-8 py-3 rounded-full border border-rose-500/50 hover:border-rose-500 text-white font-semibold hover:bg-rose-500/10 transition-all flex items-center gap-2">
-              Hire ME
-              <MessageCircle size={18} className="text-rose-500" />
-            </button>
+            {/* Resume Button */}
+            <a
+              href={Resume}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 
+              text-white font-semibold transition-all duration-300 
+              shadow-lg hover:shadow-blue-500/40 flex items-center gap-2"
+            >
+              See Resume
+              <ArrowRight size={18} />
+            </a>
+
+            {/* Hire Me Button */}
+            <a
+              href="#contact"
+              className="px-8 py-3 rounded-full border border-blue-400 
+              text-blue-400 hover:bg-blue-500 hover:text-white 
+              transition-all duration-300 flex items-center gap-2"
+            >
+              Hire Me
+              <MessageCircle size={18} />
+            </a>
           </div>
         </div>
 
-        {/* RIGHT SIDE: Image */}
-        {/* Updated alignment to fit within the fixed height properly */}
-        <div className="relative flex justify-center md:justify-end h-[50vh] md:h-auto ">
+        {/* RIGHT SIDE */}
+        <div className="flex justify-center md:justify-end">
           <RightsideCard />
         </div>
-
       </div>
     </section>
   );

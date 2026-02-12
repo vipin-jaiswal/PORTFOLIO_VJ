@@ -10,15 +10,15 @@ import Footer from './components/layout/Footer';
 function App() {
   return (
     <div className="min-h-screen bg-black">
-    
+      
       <Navbar />
       <main>
         <Hero />
         <About />
         <Skills />
-        <Project />
         <Contect />
       </main>
+        <Project />
       <Footer />
 
     </div>

@@ -42,43 +42,16 @@ const Navbar = () => {
           }
         `}
       >
-        {/* Logo */}
+        {/* LEFT - Logo */}
         <div className="flex items-center gap-3">
           <img src={logoImage} alt="Logo" className="w-10 h-10" />
-          <div className="text-white text-lg font-bold uppercase">
-            Vipin Jaiswal
-          </div>
+          <span className="text-white font-bold text-lg uppercase">
+            Vipin
+          </span>
         </div>
 
-        {/* Mobile Menu Button */}
-        <div className="md:hidden">
-          {!isMenuOpen && (
-            <Menu
-              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400"
-              onClick={() => setIsMenuOpen(true)}
-            />
-          )}
-        </div>
-
-        {/* Nav Links */}
-        <ul
-          className={`
-            fixed md:static top-0 right-0 h-screen md:h-auto w-64 md:w-auto
-            bg-slate-900 md:bg-transparent
-            flex flex-col md:flex-row items-center justify-center
-            gap-8 md:gap-6
-            transition-transform duration-300
-            ${isMenuOpen ? "translate-x-0" : "translate-x-full md:translate-x-0"}
-          `}
-        >
-          {/* Close Button */}
-          <li className="md:hidden absolute top-6 right-6">
-            <X
-              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400"
-              onClick={() => setIsMenuOpen(false)}
-            />
-          </li>
-
+        {/* CENTER - Main Navigation */}
+        <ul className="hidden md:flex items-center gap-6">
           {Nav_LINKS.map((link) => {
             const isActive = activeSection === link.id;
 
@@ -89,7 +62,7 @@ const Navbar = () => {
                 className="cursor-pointer"
               >
                 <div
-                  className={`px-4 py-2 rounded-full transition-all duration-300
+                  className={`px-4 py-2 rounded-full transition-all duration-300 text-sm
                   ${
                     isActive
                       ? "text-blue-400 bg-blue-500/10"
@@ -102,6 +75,52 @@ const Navbar = () => {
             );
           })}
         </ul>
+
+        {/* RIGHT - Hire Me Button */}
+        <div className="hidden md:block">
+          <button
+            onClick={() => handleNavClick("contact")}
+            className="px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/40"
+          >
+            Hire Me
+          </button>
+        </div>
+
+        {/* MOBILE MENU BUTTON */}
+        <div className="md:hidden ml-auto">
+          {!isMenuOpen ? (
+            <Menu
+              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400"
+              onClick={() => setIsMenuOpen(true)}
+            />
+          ) : (
+            <X
+              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400"
+              onClick={() => setIsMenuOpen(false)}
+            />
+          )}
+        </div>
+
+        {/* MOBILE MENU */}
+        {isMenuOpen && (
+          <ul className="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center gap-8 md:hidden">
+            {Nav_LINKS.map((link) => (
+              <li
+                key={link.id}
+                onClick={() => handleNavClick(link.id)}
+                className="text-white text-xl hover:text-blue-400 transition"
+              >
+                {link.label}
+              </li>
+            ))}
+            <button
+              onClick={() => handleNavClick("contact")}
+              className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-full"
+            >
+              Hire Me
+            </button>
+          </ul>
+        )}
       </div>
     </nav>
   );

@@ -1,166 +1,119 @@
-import React, { useState } from 'react';
-import { Code2, Brain, Wrench, ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
+import { X } from "lucide-react";
 
 const Skills = () => {
-  const [activeTab, setActiveTab] = useState('frontend');
+  const [active, setActive] = useState(null);
+
+  const data = {
+    frontend: [
+      "HTML", "CSS", "JavaScript", "React", "Next.js",
+      "Tailwind CSS", "Framer Motion", "Zustand",
+      "Performance Optimize", "SSR"
+    ],
+    backend: [
+      "Node.js", "Express", "REST API", "JWT/Auth",
+      "SQL", "Postgres", "Prisma ORM",
+      "DB Modeling", "Stripe Payments"
+    ],
+    tools: [
+      "Git", "GitHub", "Linux", "Vercel",
+      "VS Code", "Postman",
+      "Figma", "UX/UI Design"
+    ]
+  };
 
   const categories = [
-    {
-      id: 'frontend',
-      label: 'Frontend',
-      icon: <Code2 size={20} />,
-      description: "Building responsive, pixel-perfect interfaces with modern React ecosystems.",
-      skills: [
-        { name: "React.js", level: "90%" },
-        { name: "Tailwind CSS", level: "95%" },
-        { name: "JavaScript (ES6+)", level: "85%" },
-        { name: "Redux Toolkit", level: "80%" },
-        { name: "Framer Motion", level: "70%" },
-        { name: "HTML5 & CSS3", level: "95%" },
-      ]
-    },
-    {
-      id: 'backend',
-      label: 'AI & Backend',
-      icon: <Brain size={20} />,
-      description: "Architecting intelligent logic and robust backend systems.",
-      skills: [
-        { name: "Python", level: "85%" },
-        { name: "RAG Models", level: "80%" },
-        { name: "NLP / Transformers", level: "75%" },
-        { name: "Node.js", level: "70%" },
-        { name: "LegalTech Logic", level: "85%" },
-        { name: "REST APIs", level: "90%" },
-      ]
-    },
-    {
-      id: 'tools',
-      label: 'Tools & Devops',
-      icon: <Wrench size={20} />,
-      description: "My daily drivers for version control, testing, and deployment.",
-      skills: [
-        { name: "Git & GitHub", level: "90%" },
-        { name: "VS Code", level: "95%" },
-        { name: "Postman", level: "85%" },
-        { name: "Research Methods", level: "90%" },
-        { name: "Vercel / Netlify", level: "85%" },
-      ]
-    }
+    { id: "frontend", label: "Frontend" },
+    { id: "backend", label: "Backend & AI" },
+    { id: "tools", label: "Dev Tools" }
   ];
 
-  const activeContent = categories.find(c => c.id === activeTab);
+  const handleClick = (id) => {
+    setActive(active === id ? null : id);
+  };
 
   return (
-    <section id="skills" className="py-24 bg-slate-950 relative overflow-hidden">
-      
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:20px_20px] opacity-20" />
+    <section
+      id="skills"
+      className="relative min-h-screen bg-slate-950 overflow-hidden py-28"
+    >
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 opacity-90" />
+      <div
+        className="absolute inset-0 
+        bg-[radial-gradient(#1e293b_1px,transparent_1px)]
+        [background-size:20px_20px] opacity-20"
+      />
 
-      {/* Blue Glow Blob */}
-      <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/10 rounded-full blur-3xl -z-10"></div>
+      {/* Glow Blob */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-600/10 rounded-full blur-3xl -z-10" />
 
-      <div className="container mx-auto px-6 md:px-12 max-w-6xl relative z-10">
-        
-        {/* Header */}
-        <div className="mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Technical <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">Expertise</span>
+      <div className="container mx-auto max-w-6xl px-6 relative z-10">
+
+        {/* Title */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-white">
+            MY <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">SKILLS</span>
           </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full"></div>
         </div>
 
-        <div className="flex flex-col md:flex-row gap-8 lg:gap-12">
-          
-          {/* LEFT COLUMN */}
-          <div className="md:w-1/4 flex flex-col gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveTab(cat.id)}
-                className={`flex items-center justify-between px-6 py-4 rounded-2xl text-left transition-all duration-300 border-2 w-full group ${
-                  activeTab === cat.id
-                    ? `bg-slate-900 border-blue-500 text-blue-400 shadow-xl shadow-blue-500/10`
-                    : `bg-transparent border-transparent hover:bg-slate-900/50 text-gray-400`
-                }`}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg transition-colors ${
-                    activeTab === cat.id 
-                      ? 'bg-blue-900/30 text-blue-400' 
-                      : 'bg-slate-800 text-gray-400'
-                  }`}>
-                    {cat.icon}
-                  </div>
-                  <span className={`font-semibold ${
-                    activeTab === cat.id ? 'text-white' : ''
-                  }`}>
-                    {cat.label}
-                  </span>
-                </div>
-                
-                {activeTab === cat.id && (
-                  <ChevronRight size={16} className="text-blue-400 animate-pulse" />
-                )}
-              </button>
-            ))}
-          </div>
-
-          {/* RIGHT COLUMN */}
-          <div className="md:w-3/4">
-            <div 
-              key={activeTab}
-              className="bg-slate-900/80 backdrop-blur-md rounded-[2rem] p-8 md:p-10 border border-slate-800 shadow-2xl animate-in fade-in slide-in-from-right-8 duration-500 h-full"
+        {/* Category Cards */}
+        <div className="grid md:grid-cols-3 gap-8 mb-14">
+          {categories.map((cat) => (
+            <div
+              key={cat.id}
+              onClick={() => handleClick(cat.id)}
+              className={`cursor-pointer p-8 rounded-2xl border transition-all duration-300 backdrop-blur-xl
+              ${
+                active === cat.id
+                  ? "bg-blue-600/10 border-blue-500 shadow-xl shadow-blue-500/20 scale-105"
+                  : "bg-slate-900/50 border-slate-800 hover:border-blue-400 hover:scale-105"
+              }`}
             >
-              
-              <div className="mb-8">
-                <h3 className="text-2xl font-bold text-white mb-2 flex items-center gap-3">
-                   {activeContent.label}
-                   <span className="text-sm font-normal text-gray-400 bg-slate-800 px-3 py-1 rounded-full">
-                     {activeContent.skills.length} Skills
-                   </span>
-                </h3>
-                <p className="text-gray-300 leading-relaxed">
-                  {activeContent.description}
-                </p>
-              </div>
+              <h3 className={`text-xl font-semibold mb-2 ${
+                active === cat.id ? "text-blue-400" : "text-white"
+              }`}>
+                {cat.label}
+              </h3>
 
-              {/* Skills Grid */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-6">
-                {activeContent.skills.map((skill, index) => (
-                  <div key={index} className="group">
-                    <div className="flex justify-between mb-2">
-                      <span className="font-medium text-gray-200">
-                        {skill.name}
-                      </span>
-                      <span className="text-xs font-bold text-blue-400 bg-blue-900/30 px-2 py-1 rounded-md">
-                        {skill.level}
-                      </span>
-                    </div>
-                    
-                    <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
-                      <div 
-                        className="h-full bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full relative"
-                        style={{ width: skill.level }}
-                      >
-                         <div className="absolute inset-0 bg-white/20 w-full animate-[shimmer_2s_infinite]"></div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
+              <p className="text-gray-400 text-sm">
+                Click to explore tools & technologies
+              </p>
             </div>
-          </div>
-
+          ))}
         </div>
+
+        {/* Skill Reveal Panel */}
+        {active && (
+          <div className="relative bg-slate-900/80 border border-slate-800 rounded-3xl p-10 backdrop-blur-md shadow-2xl transition-all duration-300">
+
+            {/* Exit Button */}
+            <button
+              onClick={() => setActive(null)}
+              className="absolute top-5 right-5 text-gray-400 hover:text-red-400 transition"
+            >
+              <X size={22} />
+            </button>
+
+            {/* Skills */}
+            <div className="flex flex-wrap gap-4 justify-center">
+              {data[active].map((skill, index) => (
+                <span
+                  key={index}
+                  className="px-6 py-2 rounded-lg text-sm font-medium
+                  bg-blue-500/10 border border-blue-500/30
+                  text-blue-300 hover:bg-blue-500/20
+                  transition"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+
+          </div>
+        )}
+
       </div>
-      
-      <style>{`
-        @keyframes shimmer {
-          0% { transform: translateX(-100%); }
-          100% { transform: translateX(100%); }
-        }
-      `}</style>
     </section>
   );
 };

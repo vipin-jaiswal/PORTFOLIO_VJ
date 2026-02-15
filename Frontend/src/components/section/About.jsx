@@ -42,21 +42,21 @@ const About = () => {
             <div className="flex flex-wrap gap-3">
               <button
                 onClick={() => toggleSection("frontend")}
-                className="px-4 py-2 bg-blue-600/20 text-blue-400 rounded-full text-sm font-medium hover:bg-blue-600/30 transition"
+                className="px-4 py-2 bg-blue-600/20 text-blue-400 rounded-full text-sm font-medium hover:bg-blue-600/30 transition cursor-pointer"
               >
                 Full Stack Engineering
               </button>
 
               <button
                 onClick={() => toggleSection("ai")}
-                className="px-4 py-2 bg-purple-600/20 text-purple-400 rounded-full text-sm font-medium hover:bg-purple-600/30 transition"
+                className="px-4 py-2 bg-purple-600/20 text-purple-400 rounded-full text-sm font-medium hover:bg-purple-600/30 transition cursor-pointer"
               >
                 RAG Systems
               </button>
 
               <button
                 onClick={() => toggleSection("research")}
-                className="px-4 py-2 bg-cyan-600/20 text-cyan-400 rounded-full text-sm font-medium hover:bg-cyan-600/30 transition"
+                className="px-4 py-2 bg-cyan-600/20 text-cyan-400 rounded-full text-sm font-medium hover:bg-cyan-600/30 transition cursor-pointer"
               >
                 Structured Research
               </button>
@@ -83,7 +83,7 @@ const About = () => {
                       e.stopPropagation();
                       setActiveSection(null);
                     }}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition"
+                    className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition cursor-pointer"
                   >
                     <X size={22} />
                   </button>
@@ -123,7 +123,7 @@ const About = () => {
                       e.stopPropagation();
                       setActiveSection(null);
                     }}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition"
+                    className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition cursor-pointer"
                   >
                     <X size={22} />
                   </button>
@@ -163,7 +163,7 @@ const About = () => {
                       e.stopPropagation();
                       setActiveSection(null);
                     }}
-                    className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition"
+                    className="absolute top-4 right-4 text-gray-400 hover:text-red-400 transition cursor-pointer"
                   >
                     <X size={22} />
                   </button>

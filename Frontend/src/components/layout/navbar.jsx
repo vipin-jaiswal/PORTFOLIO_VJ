@@ -30,99 +30,115 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
-      <div
-        className={`
-          container mx-auto px-6 py-3 flex items-center justify-between
+    <>
+      {/* NAVBAR */}
+      <nav className="fixed top-4 left-0 w-full z-50 flex justify-center px-4">
+        <div
+          className={`relative container mx-auto px-6 py-3 flex items-center justify-between
           rounded-full transition-all duration-300
           ${
             isScrolled
               ? "bg-slate-900/90 shadow-xl backdrop-blur-md"
               : "bg-slate-900/60 backdrop-blur-sm"
-          }
-        `}
+          }`}
+        >
+          {/* Logo */}
+          <div className="flex items-center gap-3">
+            <img src={logoImage} alt="Logo" className="w-10 h-10" />
+            <span className="text-white font-bold text-lg uppercase">
+              Vipin
+            </span>
+          </div>
+
+          {/* Desktop Nav */}
+          <ul className="hidden md:flex items-center gap-6">
+            {Nav_LINKS.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <li
+                  key={link.id}
+                  onClick={() => handleNavClick(link.id)}
+                  className="cursor-pointer"
+                >
+                  <div
+                    className={`px-4 py-2 rounded-full transition-all duration-300 text-sm
+                    ${
+                      isActive
+                        ? "text-blue-400 bg-blue-500/10"
+                        : "text-gray-300 hover:text-blue-400 hover:bg-white/10"
+                    }`}
+                  >
+                    {link.label}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Desktop Hire */}
+          <div className="hidden md:block">
+            <button
+              onClick={() => handleNavClick("contact")}
+              className="px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/40"
+            >
+              Hire Me
+            </button>
+          </div>
+
+          {/* Mobile Menu Icon */}
+          <div className="md:hidden ml-auto">
+            <Menu
+              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400 transition"
+              onClick={() => setIsMenuOpen(true)}
+            />
+          </div>
+        </div>
+      </nav>
+
+      {/* Mobile Floating Drawer */}
+      <div
+        className={`fixed top-24 right-4 w-72 h-[420px]
+        bg-white/5 backdrop-blur-xl border border-white/10
+        rounded-3xl shadow-2xl z-50
+        transform transition-all duration-500 ease-in-out md:hidden
+        ${
+          isMenuOpen
+            ? "translate-x-0 opacity-100"
+            : "translate-x-20 opacity-0 pointer-events-none"
+        }`}
       >
-        {/* LEFT - Logo */}
-        <div className="flex items-center gap-3">
-          <img src={logoImage} alt="Logo" className="w-10 h-10" />
-          <span className="text-white font-bold text-lg uppercase">
-            Vipin
-          </span>
+        {/* Close Button */}
+        <div className="flex justify-end p-4">
+          <X
+            className="text-white w-6 h-6 cursor-pointer hover:text-red-400 transition"
+            onClick={() => setIsMenuOpen(false)}
+          />
         </div>
 
-        {/* CENTER - Main Navigation */}
-        <ul className="hidden md:flex items-center gap-6">
-          {Nav_LINKS.map((link) => {
-            const isActive = activeSection === link.id;
-
-            return (
-              <li
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className="cursor-pointer"
-              >
-                <div
-                  className={`px-4 py-2 rounded-full transition-all duration-300 text-sm
-                  ${
-                    isActive
-                      ? "text-blue-400 bg-blue-500/10"
-                      : "text-gray-300 hover:text-blue-400 hover:bg-white/10"
-                  }`}
-                >
-                  {link.label}
-                </div>
-              </li>
-            );
-          })}
+        {/* Nav Links */}
+        <ul className="flex flex-col items-start px-6 gap-6">
+          {Nav_LINKS.map((link) => (
+            <li
+              key={link.id}
+              onClick={() => handleNavClick(link.id)}
+              className="text-white text-lg hover:text-blue-400 transition cursor-pointer"
+            >
+              {link.label}
+            </li>
+          ))}
         </ul>
 
-        {/* RIGHT - Hire Me Button */}
-        <div className="hidden md:block">
+        {/* Hire Button */}
+        <div className="px-6 mt-8">
           <button
             onClick={() => handleNavClick("contact")}
-            className="px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/40"
+            className="w-full py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
           >
             Hire Me
           </button>
         </div>
-
-        {/* MOBILE MENU BUTTON */}
-        <div className="md:hidden ml-auto">
-          {!isMenuOpen ? (
-            <Menu
-              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400"
-              onClick={() => setIsMenuOpen(true)}
-            />
-          ) : (
-            <X
-              className="text-white w-7 h-7 cursor-pointer hover:text-blue-400"
-              onClick={() => setIsMenuOpen(false)}
-            />
-          )}
-        </div>
-
-        {/* MOBILE MENU */}
-        {isMenuOpen && (
-          <ul className="fixed inset-0 bg-slate-950 flex flex-col items-center justify-center gap-8 md:hidden">
-            {Nav_LINKS.map((link) => (
-              <li
-                key={link.id}
-                onClick={() => handleNavClick(link.id)}
-                className="text-white text-xl hover:text-blue-400 transition"
-              >
-                {link.label}
-              </li>
-            ))}
-            <button
-              onClick={() => handleNavClick("contact")}
-              className="mt-6 px-6 py-3 bg-blue-600 text-white rounded-full"
-            >
-              Hire Me
-            </button>
-          </ul>
-        )}
       </div>
-    </nav>
+    </>
   );
 };
 

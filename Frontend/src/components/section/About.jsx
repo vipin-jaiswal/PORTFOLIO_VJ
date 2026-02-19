@@ -39,7 +39,7 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen pt-24 flex items-center bg-slate-950"
+      className="relative min-h-screen pt-24 flex items-center bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 opacity-90"
     >
       <div className="container mx-auto px-6 md:px-12">
 

@@ -113,7 +113,10 @@ const Home = () => {
               See Resume <ArrowRight size={18} />
             </a>
 
-            {/* Lamp + Hire */}
+            {/* Lamp  */}
+            {/* and Hire */}
+            
+            
             <div className="relative flex items-center gap-6">
 
               <div
@@ -151,5 +154,7 @@ const Home = () => {
     </section>
   );
 };
+
+
 
 export default Home;

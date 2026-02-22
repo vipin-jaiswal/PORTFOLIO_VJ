@@ -120,7 +120,9 @@ const Home = () => {
             <div className="relative flex items-center gap-6">
               <div
                 onClick={() => setLightOn(!lightOn)}
+                
                 className="cursor-pointer hover:scale-110 transition-transform duration-300"
+
               >
                 <DeskLamp
                   size={120}

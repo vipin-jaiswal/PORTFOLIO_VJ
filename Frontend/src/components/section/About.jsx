@@ -1,8 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Code2, BrainCircuit, Database, Globe, X } from "lucide-react";
 
 const About = () => {
   const [activeCard, setActiveCard] = useState(null);
+
+  const [lightOn] = useState(false);
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+
+  // Mouse Follow Glow
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!lightOn) {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        setPosition({ x, y });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [lightOn]);
+
+  useEffect(() => {
+    if (lightOn) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPosition({ x: 75, y: 40 });
+    }
+  }, [lightOn]);
 
   const skills = [
     {
@@ -39,11 +63,33 @@ const About = () => {
   return (
     <section
       id="about"
-      className="relative min-h-screen pt-24 flex items-center bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 opacity-90"
+      className="relative min-h-screen pt-24 flex items-center bg-slate-950 overflow-hidden"
     >
-      <div className="container mx-auto px-6 md:px-12">
+      {/* BASE BACKGROUND */}
+      <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-slate-950 to-blue-950" />
 
-        {/* 🔥 TOP SECTION */}
+      {/* DOTTED GRID */}
+      <div
+        className="absolute inset-0 z-0
+        bg-[radial-gradient(circle,rgba(96,165,250,0.25)_1.2px,transparent_1.2px)]
+        bg-size-[32px_32px]"
+      />
+
+      {/* SUBTLE GLOW */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(
+            circle at ${position.x}% ${position.y}%,
+            rgba(59,130,246,0.07),
+            transparent 55%
+          )`,
+        }}
+      />
+
+      <div className="container mx-auto px-6 md:px-12 relative z-10">
+
+        {/* TOP SECTION */}
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
 
           {/* LEFT */}
@@ -51,32 +97,30 @@ const About = () => {
             <h2 className="text-4xl font-bold text-white leading-tight">
               About <span className="text-blue-500">Me</span>
             </h2>
+
             <div className="w-16 h-1 bg-blue-500 mt-4 rounded-full" />
           </div>
 
           {/* RIGHT */}
           <div className="space-y-6">
             <p className="text-gray-300 text-lg leading-relaxed">
-              I am <span className="text-white font-semibold">Vipin Jaiswal</span>, 
-              a passionate Full Stack Developer and AI Researcher dedicated 
-              to building scalable, intelligent, and high-performance digital 
-              products. My expertise lies in crafting seamless user experiences 
-              while integrating smart automation and AI-driven systems that 
-              create measurable real-world impact.
+              I am <span className="text-white font-semibold">Vipin Jaiswal</span>,
+              a passionate Full Stack Developer and AI Researcher dedicated
+              to building scalable, intelligent, and high-performance digital
+              products.
             </p>
 
             <p className="text-gray-400 text-base leading-relaxed">
-              I specialize in combining modern frontend technologies with 
-              powerful backend architectures and machine learning workflows. 
-              From designing responsive interfaces to developing secure APIs 
-              and deploying AI-powered applications, my goal is to create 
-              solutions that are efficient, optimized, scalable, and future-ready.
+              I specialize in combining modern frontend technologies with
+              powerful backend architectures and machine learning workflows.
+              From designing responsive interfaces to developing secure APIs
+              and deploying AI-powered applications.
             </p>
           </div>
 
         </div>
 
-        {/* 🔥 SKILLS SECTION */}
+        {/* SKILLS */}
         <h3 className="text-2xl font-semibold text-white text-center mb-8">
           Core <span className="text-blue-500">Skills</span>
         </h3>
@@ -105,7 +149,7 @@ const About = () => {
 
       </div>
 
-      {/* 🔥 MODAL */}
+      {/* MODAL */}
       {activeCard && (
         <div
           className="fixed inset-0 bg-black/70 backdrop-blur-sm 
@@ -115,7 +159,7 @@ const About = () => {
           <div
             onClick={(e) => e.stopPropagation()}
             className="relative bg-slate-900 border border-blue-500/40 
-            w-[90%] md:w-[500px] p-7 rounded-xl"
+            w-[90%] md:w-125 p-7 rounded-xl"
           >
             <button
               onClick={() => setActiveCard(null)}

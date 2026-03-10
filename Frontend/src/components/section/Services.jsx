@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import {
   Brain, Code2, Palette, Database, Globe,
   Smartphone, ShieldCheck, Rocket, Cloud,
@@ -22,7 +22,32 @@ const services = [
 ];
 
 const Services = () => {
+
   const scrollRef = useRef(null);
+
+  const [lightOn] = useState(false);
+  const [position, setPosition] = useState({ x: 50, y: 50 });
+
+  // Mouse Follow Glow (same as Home)
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      if (!lightOn) {
+        const x = (e.clientX / window.innerWidth) * 100;
+        const y = (e.clientY / window.innerHeight) * 100;
+        setPosition({ x, y });
+      }
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
+  }, [lightOn]);
+
+  useEffect(() => {
+    if (lightOn) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setPosition({ x: 75, y: 40 });
+    }
+  }, [lightOn]);
 
   const scroll = (direction) => {
     if (scrollRef.current) {
@@ -37,10 +62,30 @@ const Services = () => {
   return (
     <section
       id="services"
-      className="relative py-24 bg-slate-950"
+      className="relative pt-32 pb-24 bg-slate-950 overflow-hidden min-h-screen"
     >
-      {/* Background Gradient (Same as Home) */}
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950 opacity-90" />
+
+      {/* Base Gradient */}
+      <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-slate-950 to-blue-950" />
+
+      {/* Dotted Grid */}
+      <div
+        className="absolute inset-0 z-0
+        bg-[radial-gradient(circle,rgba(96,165,250,0.25)_1.2px,transparent_1.2px)]
+        bg-size-[32px_32px]"
+      />
+
+      {/* Subtle Glow Spotlight */}
+      <div
+        className="absolute inset-0 z-0 pointer-events-none"
+        style={{
+          background: `radial-gradient(
+            circle at ${position.x}% ${position.y}%,
+            rgba(59,130,246,0.07),
+            transparent 55%
+          )`,
+        }}
+      />
 
       <div className="container mx-auto max-w-6xl px-6 relative z-10">
 
@@ -51,7 +96,6 @@ const Services = () => {
           </h2>
           <p className="text-gray-400 mt-4">
             Explore what I can build for you →
-            
           </p>
         </div>
 
@@ -68,7 +112,7 @@ const Services = () => {
               <div
                 key={index}
                 className="snap-start bg-slate-900/60 backdrop-blur-lg 
-                p-8 min-w-[270px] rounded-2xl 
+                p-8 min-w-67.5 rounded-2xl 
                 border border-slate-800 
                 transition-all duration-500 ease-out
                 hover:border-blue-400 
@@ -84,7 +128,7 @@ const Services = () => {
           })}
         </div>
 
-        {/* Bottom Arrow Controls */}
+        {/* Arrow Controls */}
         <div className="flex justify-center gap-6 mt-6">
           <button
             onClick={() => scroll("left")}

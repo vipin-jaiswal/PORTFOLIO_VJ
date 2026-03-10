@@ -4,7 +4,7 @@ import RightsideCard from "../ui/Card";
 import Resume from "../../data/resume/RESUME (10).pdf";
 import DeskLamp from "../ui/TableLemp";
 
-const Home = () => {
+const Home = ({ setPage }) => {
   const [lightOn, setLightOn] = useState(false);
   const [position, setPosition] = useState({ x: 50, y: 50 });
 
@@ -25,6 +25,7 @@ const Home = () => {
   // 💡 Lamp Click → Move spotlight to right
   useEffect(() => {
     if (lightOn) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPosition({ x: 75, y: 40 });
     }
   }, [lightOn]);
@@ -43,19 +44,6 @@ const Home = () => {
         className="absolute inset-0 z-0
         bg-[radial-gradient(circle,rgba(96,165,250,0.25)_1.2px,transparent_1.2px)]
         bg-[size:32px_32px]"
-      />
-
-      {/* 🎥 DARK CINEMATIC SPOTLIGHT MASK */}
-      <div
-        className="absolute inset-0 z-0 pointer-events-none transition-all duration-300"
-        style={{
-          background: `radial-gradient(
-            circle at ${position.x}% ${position.y}%,
-            rgba(0,0,0,0) 0%,
-            rgba(0,0,0,0.25) 15%,
-            rgba(2,6,23,0.98) 45%
-          )`,
-        }}
       />
 
       {/* ✨ Subtle Controlled Glow */}
@@ -131,9 +119,9 @@ const Home = () => {
               </div>
 
               <a
-                href="#contact"
+                onClick={() => setPage("contact")}
                 className={`px-8 py-3 rounded-full flex items-center gap-2 
-                font-semibold transition-all duration-500
+                font-semibold transition-all duration-500 cursor-pointer
                 ${
                   lightOn
                     ? "opacity-100 translate-x-0 bg-yellow-400 text-black shadow-xl"

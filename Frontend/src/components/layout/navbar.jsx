@@ -4,7 +4,7 @@ import { Nav_LINKS } from "../../utils/constants";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
 import logoImage from "../../assets/logo.png";
 
-const Navbar = () => {
+const Navbar = ({ setPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -22,6 +22,7 @@ const Navbar = () => {
   }, []);
 
   const handleNavClick = (id) => {
+    setPage(id);
     const section = document.getElementById(id);
     if (section) {
       section.scrollIntoView({ behavior: "smooth" });
@@ -40,13 +41,13 @@ const Navbar = () => {
             isScrolled
               ? "bg-slate-900/90 shadow-xl backdrop-blur-md"
               : "bg-slate-900/60 backdrop-blur-sm"
-          }`}
+          }`} 
         >
           {/* Logo */}
           <div className="flex items-center gap-3">
             <img src={logoImage} alt="Logo" className="w-10 h-10" />
             <span className="text-white font-bold text-lg uppercase">
-              Vipin
+              Vipin Jaiswal
             </span>
           </div>
 

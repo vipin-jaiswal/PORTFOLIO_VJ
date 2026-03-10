@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "./components/layout/Navbar";
 import Hero from "./components/section/Home";
 import About from "./components/section/About";
@@ -8,19 +8,32 @@ import Contect from "./components/section/contect";
 import Footer from "./components/layout/Footer";
 
 function App() {
+  const [page, setPage] = useState("home");
+
+  const renderPage = () => {
+    switch (page) {
+      case "about":
+        return <About />;
+      case "services":
+        return <Service />;
+      case "projects":
+        return <Project />;
+      case "contact":
+        return <Contect />;
+      default:
+        return <Hero setPage={setPage} />;
+    }
+  };
+
   return (
     <div className="min-h-screen bg-black text-white">
 
       {/* Navbar */}
-      <Navbar />
+      <Navbar setPage={setPage} />
 
-      {/* Main Sections */}
+      {/* Page Content */}
       <main>
-        <Hero />
-        <About />
-        <Service />
-        <Project />
-        <Contect />
+        {renderPage()}
       </main>
 
       {/* Footer */}
@@ -30,4 +43,4 @@ function App() {
   );
 }
 
-export default App;
+export default App; 

@@ -37,13 +37,13 @@ const Home = ({ setPage }) => {
     >
       {/* ================= BASE BACKGROUND ================= */}
 
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950" />
+      <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-slate-950 to-blue-950" />
 
       {/* Premium Dotted Grid */}
       <div
         className="absolute inset-0 z-0
         bg-[radial-gradient(circle,rgba(96,165,250,0.25)_1.2px,transparent_1.2px)]
-        bg-[size:32px_32px]"
+        bg-size-[32px_32px]"
       />
 
       {/* ✨ Subtle Controlled Glow */}
@@ -75,7 +75,7 @@ const Home = ({ setPage }) => {
 
           <h2 className="text-2xl md:text-4xl font-bold text-gray-300">
             A{" "}
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               Full Stack Developer
             </span>{" "}
             & UI/UX Designer

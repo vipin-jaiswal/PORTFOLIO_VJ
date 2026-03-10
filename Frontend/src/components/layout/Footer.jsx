@@ -6,11 +6,11 @@ const Footer = () => {
     <footer className="relative bg-slate-950 overflow-hidden pt-20">
 
       {/* Background Theme */}
-      <div className="absolute inset-0 bg-gradient-to-tr from-slate-900 via-slate-950 to-blue-950 opacity-90" />
+      <div className="absolute inset-0 bg-linear-to-tr from-slate-900 via-slate-950 to-blue-950 opacity-90" />
       <div
         className="absolute inset-0 
         bg-[radial-gradient(#1e293b_1px,transparent_1px)]
-        [background-size:20px_20px] opacity-20"
+        bg-size-[20px_20px] opacity-20"
       />
 
       <div className="relative z-10 container mx-auto max-w-6xl px-6">

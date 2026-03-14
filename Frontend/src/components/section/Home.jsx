@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { ArrowRight, MessageCircle } from "lucide-react";
 import RightsideCard from "../ui/Card";
-import Resume from "../../data/resume/RESUME (10).pdf";
 import DeskLamp from "../ui/TableLemp";
+import { siteData } from "../../data/siteData";
 
 const Home = ({ setPage }) => {
   const [lightOn, setLightOn] = useState(false);
@@ -66,24 +66,21 @@ const Home = ({ setPage }) => {
         <div className="space-y-6 text-center md:text-left">
           
           <h3 className="text-sm tracking-widest uppercase text-blue-400 font-medium">
-            Hello There, Welcome to my site
+            {siteData.home.greeting}
           </h3>
 
           <h1 className="text-4xl md:text-6xl font-extrabold text-white leading-tight">
-            I'm <span className="text-blue-400">Vipin Jaiswal</span>
+            I&apos;m <span className="text-blue-400">{siteData.personal.name}</span>
           </h1>
 
           <h2 className="text-2xl md:text-4xl font-bold text-gray-300">
-            A{" "}
             <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              Full Stack Developer
-            </span>{" "}
-            & UI/UX Designer
+              {siteData.personal.subtitle}
+            </span>
           </h2>
 
           <p className="text-gray-400 max-w-xl text-base md:text-lg leading-relaxed">
-            I build interactive, high-performance websites and applications
-            with scalable architecture and modern UI systems.
+            {siteData.home.description}
           </p>
 
           {/* DESKTOP BUTTONS */}
@@ -91,14 +88,14 @@ const Home = ({ setPage }) => {
 
             {/* Resume Button */}
             <a
-              href={Resume}
+              href={siteData.personal.resumePath}
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 
               text-white font-semibold transition-all duration-300 
               shadow-lg hover:shadow-blue-500/30 flex items-center gap-2"
             >
-              See Resume <ArrowRight size={18} />
+              {siteData.home.resumeButtonText} <ArrowRight size={18} />
             </a>
 
             {/* Lamp  */}
@@ -128,7 +125,7 @@ const Home = ({ setPage }) => {
                     : "opacity-0 -translate-x-6 pointer-events-none"
                 }`}
               >
-                Hire Me <MessageCircle size={18} />
+                {siteData.home.hireButtonText} <MessageCircle size={18} />
               </a>
 
             </div>

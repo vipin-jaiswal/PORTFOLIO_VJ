@@ -5,21 +5,22 @@ import {
   LayoutDashboard, GitBranch, Cpu,
   ChevronLeft, ChevronRight
 } from "lucide-react";
+import { siteData } from "../../data/siteData";
 
-const services = [
-  { icon: Brain, title: "AI Web Apps" },
-  { icon: Cpu, title: "Machine Learning" },
-  { icon: Code2, title: "Frontend Development" },
-  { icon: Database, title: "Backend Development" },
-  { icon: Globe, title: "Full Stack Apps" },
-  { icon: Palette, title: "UI / UX Design" },
-  { icon: LayoutDashboard, title: "Admin Dashboards" },
-  { icon: Smartphone, title: "Responsive Design" },
-  { icon: Cloud, title: "Cloud Deployment" },
-  { icon: Rocket, title: "Performance Optimization" },
-  { icon: ShieldCheck, title: "Web Security" },
-  { icon: GitBranch, title: "Version Control" }
-];
+const serviceIconMap = {
+  Brain,
+  Cpu,
+  Code2,
+  Database,
+  Globe,
+  Palette,
+  LayoutDashboard,
+  Smartphone,
+  Cloud,
+  Rocket,
+  ShieldCheck,
+  GitBranch,
+};
 
 const Services = () => {
 
@@ -92,10 +93,10 @@ const Services = () => {
         {/* Heading */}
         <div className="text-center mb-14">
           <h2 className="text-4xl md:text-5xl font-extrabold text-white">
-            My <span className="text-blue-400">Services</span>
+            {siteData.services.heading} <span className="text-blue-400">{siteData.services.headingHighlight}</span>
           </h2>
           <p className="text-gray-400 mt-4">
-            Explore what I can build for you →
+            {siteData.services.description}
           </p>
         </div>
 
@@ -106,8 +107,8 @@ const Services = () => {
           scroll-smooth snap-x snap-mandatory 
           scrollbar-hide pt-6 pb-10"
         >
-          {services.map((service, index) => {
-            const Icon = service.icon;
+          {siteData.services.items.map((service, index) => {
+            const Icon = serviceIconMap[service.icon] || Code2;
             return (
               <div
                 key={index}

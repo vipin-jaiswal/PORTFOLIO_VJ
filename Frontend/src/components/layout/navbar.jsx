@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
-import { Nav_LINKS } from "../../utils/constants";
+import { siteData } from "../../data/siteData";
 import { useScrollSpy } from "../../hooks/useScrollSpy";
-import logoImage from "../../assets/logo.png";
 
 const Navbar = ({ setPage }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const navLinks = siteData.nav.links;
 
   const activeSection = useScrollSpy(
-    Nav_LINKS.map((link) => link.id)
+    navLinks.map((link) => link.id)
   );
 
   useEffect(() => {
@@ -41,19 +41,19 @@ const Navbar = ({ setPage }) => {
             isScrolled
               ? "bg-slate-900/90 shadow-xl backdrop-blur-md"
               : "bg-slate-900/60 backdrop-blur-sm"
-          }`} 
+          }`}
         >
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src={logoImage} alt="Logo" className="w-10 h-10" />
+            <img src={siteData.assets.logo} alt={siteData.personal.logoAlt} className="w-10 h-10" />
             <span className="text-white font-bold text-lg uppercase">
-              Vipin Jaiswal
+              {siteData.personal.name}
             </span>
           </div>
 
           {/* Desktop Nav */}
           <ul className="hidden md:flex items-center gap-6">
-            {Nav_LINKS.map((link) => {
+            {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
                 <li
@@ -82,7 +82,7 @@ const Navbar = ({ setPage }) => {
               onClick={() => handleNavClick("contact")}
               className="px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/40"
             >
-              Hire Me
+              {siteData.nav.hireButtonText}
             </button>
           </div>
 
@@ -118,7 +118,7 @@ const Navbar = ({ setPage }) => {
 
         {/* Nav Links */}
         <ul className="flex flex-col items-start px-6 gap-6">
-          {Nav_LINKS.map((link) => (
+          {navLinks.map((link) => (
             <li
               key={link.id}
               onClick={() => handleNavClick(link.id)}
@@ -135,7 +135,7 @@ const Navbar = ({ setPage }) => {
             onClick={() => handleNavClick("contact")}
             className="w-full py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
           >
-            Hire Me
+            {siteData.nav.hireButtonText}
           </button>
         </div>
       </div>

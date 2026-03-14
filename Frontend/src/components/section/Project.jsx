@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { siteData } from "../../data/siteData";
 
-const username = "vipin-jaiswal";
-
-const selectedProjects = [
-  "AI-INVOICE-GENRETOR",
-  "Multiple-Disease-Prediction",
-];
+const username = siteData.projects.github.username;
+const selectedProjects = siteData.projects.github.selectedRepos;
 
 const Projects = () => {
   const [repos, setRepos] = useState([]);
@@ -58,7 +55,7 @@ const Projects = () => {
         setRepos(sortedRepos);
       } catch (err) {
         console.error(err);
-        setError("Failed to load projects. Please try again later.");
+        setError(siteData.projects.errorText);
       } finally {
         setLoading(false);
       }
@@ -100,9 +97,9 @@ const Projects = () => {
         {/* Title */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            MY{" "}
+            {siteData.projects.heading}{" "}
             <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-400">
-              PROJECTS
+              {siteData.projects.headingHighlight}
             </span>
           </h2>
         </div>
@@ -110,7 +107,7 @@ const Projects = () => {
         {/* Loading */}
         {loading && (
           <div className="text-center text-gray-400 animate-pulse">
-            Loading projects...
+            {siteData.projects.loadingText}
           </div>
         )}
 
@@ -138,7 +135,7 @@ const Projects = () => {
                 </h3>
 
                 <p className="text-gray-400 mb-6 min-h-15">
-                  {repo.description || "No description available."}
+                  {repo.description || siteData.projects.emptyDescription}
                 </p>
 
                 <div className="flex justify-between items-center mb-6 text-sm">
@@ -160,7 +157,7 @@ const Projects = () => {
                   className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 
                   text-white rounded-full transition duration-300"
                 >
-                  View on GitHub →
+                  {siteData.projects.ctaText}
                 </a>
               </div>
             ))}

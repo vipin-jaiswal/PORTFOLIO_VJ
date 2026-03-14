@@ -1,5 +1,5 @@
 import React from "react";
-import vipinImage from "../../assets/vipin.jpeg";
+import { siteData } from "../../data/siteData";
 
 const Card = () => {
   return (
@@ -23,8 +23,8 @@ const Card = () => {
 
           {/* Image */}
           <img
-            src={vipinImage}
-            alt="Vipin Jaiswal"
+            src={siteData.assets.profileImage}
+            alt={siteData.personal.profileImageAlt}
             className="w-full h-full object-cover
             transition-transform duration-700 ease-in-out
             group-hover:scale-105"
@@ -38,12 +38,12 @@ const Card = () => {
           <div className="absolute bottom-0 left-0 w-full p-6">
             
             <h3 className="text-2xl font-bold text-white mb-1">
-              Vipin Jaiswal
+              {siteData.personal.name}
             </h3>
 
             <p className="text-cyan-400 font-medium opacity-0 
             group-hover:opacity-100 transition-opacity duration-500">
-              Full Stack Developer
+              {siteData.personal.title}
             </p>
 
           </div>

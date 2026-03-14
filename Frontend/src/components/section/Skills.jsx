@@ -1,31 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { siteData } from "../../data/siteData";
 
 const Skills = () => {
   const [active, setActive] = useState(null);
 
-  const data = {
-    frontend: [
-      "HTML", "CSS", "JavaScript", "React", "Next.js",
-      "Tailwind CSS", "Framer Motion", "Zustand",
-      "Performance Optimize", "SSR"
-    ],
-    backend: [
-      "Node.js", "Express", "REST API", "JWT/Auth",
-      "SQL", "Postgres", "Prisma ORM",
-      "DB Modeling", "Stripe Payments"
-    ],
-    tools: [
-      "Git", "GitHub", "Linux", "Vercel",
-      "VS Code", "Postman",
-      "Figma", "UX/UI Design"
-    ]
-  };
-
-  const categories = [
-    { id: "frontend", label: "Frontend" },
-    { id: "backend", label: "Backend & AI" },
-    { id: "tools", label: "Dev Tools" }
-  ];
+  const data = siteData.skillExplorer.data;
+  const categories = siteData.skillExplorer.categories;
 
   const handleClick = (id) => {
     setActive(active === id ? null : id);
@@ -51,9 +31,9 @@ const Skills = () => {
         {/* Title */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white">
-            MY{" "}
+            {siteData.skillExplorer.heading}{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-              SKILLS
+              {siteData.skillExplorer.headingHighlight}
             </span>
           </h2>
         </div>
@@ -80,7 +60,7 @@ const Skills = () => {
                 </h3>
 
                 <p className="text-gray-400 text-sm">
-                  Click to explore tools & technologies
+                  {siteData.skillExplorer.cardHint}
                 </p>
               </div>
 

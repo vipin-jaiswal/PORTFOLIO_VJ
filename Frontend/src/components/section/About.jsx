@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Code2, BrainCircuit, Database, Globe, X } from "lucide-react";
+import { siteData } from "../../data/siteData";
+
+const aboutIconMap = {
+  Code2,
+  BrainCircuit,
+  Database,
+  Globe,
+};
 
 const About = () => {
   const [activeCard, setActiveCard] = useState(null);
@@ -28,37 +36,7 @@ const About = () => {
     }
   }, [lightOn]);
 
-  const skills = [
-    {
-      icon: <Code2 size={22} />,
-      title: "Frontend Development",
-      desc: "Building modern, scalable and responsive user interfaces.",
-      tools: ["React", "Next.js", "Tailwind CSS", "Responsive Design"],
-    },
-    {
-      icon: <Database size={22} />,
-      title: "Backend Systems",
-      desc: "Designing secure and high-performance server architectures.",
-      tools: ["Node.js", "Express.js", "MongoDB", "REST APIs"],
-    },
-    {
-      icon: <BrainCircuit size={22} />,
-      title: "AI Engineering",
-      desc: "Developing intelligent automation and AI-driven solutions.",
-      tools: ["RAG Systems", "Vector Databases", "NLP", "TensorFlow"],
-    },
-    {
-      icon: <Globe size={22} />,
-      title: "Full Stack Architecture",
-      desc: "Creating scalable and production-ready systems.",
-      tools: [
-        "System Design",
-        "Performance Optimization",
-        "Deployment",
-        "Clean Code",
-      ],
-    },
-  ];
+  const skills = siteData.about.skillCards;
 
   return (
     <section
@@ -95,7 +73,7 @@ const About = () => {
           {/* LEFT */}
           <div>
             <h2 className="text-4xl font-bold text-white leading-tight">
-              About <span className="text-blue-500">Me</span>
+              {siteData.about.heading} <span className="text-blue-500">{siteData.about.headingHighlight}</span>
             </h2>
 
             <div className="w-16 h-1 bg-blue-500 mt-4 rounded-full" />
@@ -104,17 +82,11 @@ const About = () => {
           {/* RIGHT */}
           <div className="space-y-6">
             <p className="text-gray-300 text-lg leading-relaxed">
-              I am <span className="text-white font-semibold">Vipin Jaiswal</span>,
-              a passionate Full Stack Developer and AI Researcher dedicated
-              to building scalable, intelligent, and high-performance digital
-              products.
+              {siteData.about.intro}
             </p>
 
             <p className="text-gray-400 text-base leading-relaxed">
-              I specialize in combining modern frontend technologies with
-              powerful backend architectures and machine learning workflows.
-              From designing responsive interfaces to developing secure APIs
-              and deploying AI-powered applications.
+              {siteData.about.details}
             </p>
           </div>
 
@@ -122,19 +94,21 @@ const About = () => {
 
         {/* SKILLS */}
         <h3 className="text-2xl font-semibold text-white text-center mb-8">
-          Core <span className="text-blue-500">Skills</span>
+          {siteData.about.skillsHeading} <span className="text-blue-500">{siteData.about.skillsHeadingHighlight}</span>
         </h3>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {skills.map((skill, index) => (
             <div
-              key={index}
+              key={skill.title + index}
               onClick={() => setActiveCard(skill)}
               className="cursor-pointer bg-white/5 border border-white/10 
               p-5 rounded-xl hover:border-blue-500/50 
               hover:-translate-y-1 transition duration-200"
             >
-              <div className="text-blue-500 mb-3">{skill.icon}</div>
+              <div className="text-blue-500 mb-3">
+                {(aboutIconMap[skill.icon] ? React.createElement(aboutIconMap[skill.icon], { size: 22 }) : <Code2 size={22} />)}
+              </div>
 
               <h4 className="text-sm font-semibold text-white mb-1">
                 {skill.title}
@@ -168,7 +142,9 @@ const About = () => {
               <X size={20} />
             </button>
 
-            <div className="text-blue-500 mb-3">{activeCard.icon}</div>
+            <div className="text-blue-500 mb-3">
+              {(aboutIconMap[activeCard.icon] ? React.createElement(aboutIconMap[activeCard.icon], { size: 22 }) : <Code2 size={22} />)}
+            </div>
 
             <h2 className="text-xl font-bold text-white mb-3">
               {activeCard.title}

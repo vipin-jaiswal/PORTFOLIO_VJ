@@ -72,11 +72,11 @@ const About = () => {
 
           {/* LEFT */}
           <div>
-            <h2 className="text-4xl font-bold text-white leading-tight">
+            <h2 className="text-6xl px-40 font-bold text-white leading-tight">
               {siteData.about.heading} <span className="text-blue-500">{siteData.about.headingHighlight}</span>
             </h2>
 
-            <div className="w-16 h-1 bg-blue-500 mt-4 rounded-full" />
+            <div className="ml-44 w-48 h-1 bg-blue-500 mt-4 rounded-full" />
           </div>
 
           {/* RIGHT */}

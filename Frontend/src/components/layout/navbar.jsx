@@ -8,9 +8,7 @@ const Navbar = ({ setPage }) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const navLinks = siteData.nav.links;
 
-  const activeSection = useScrollSpy(
-    navLinks.map((link) => link.id)
-  );
+  const activeSection = useScrollSpy(navLinks.map((link) => link.id));
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,11 +20,15 @@ const Navbar = ({ setPage }) => {
   }, []);
 
   const handleNavClick = (id) => {
-    setPage(id);
+    if (typeof setPage === "function") {
+      setPage(id);
+    }
+
     const section = document.getElementById(id);
     if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
     }
+
     setIsMenuOpen(false);
   };
 
@@ -45,7 +47,11 @@ const Navbar = ({ setPage }) => {
         >
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <img src={siteData.assets.logo} alt={siteData.personal.logoAlt} className="w-10 h-10" />
+            <img
+              src={siteData.assets.logo}
+              alt={siteData.personal.logoAlt}
+              className="w-10 h-10"
+            />
             <span className="text-white font-bold text-lg uppercase">
               {siteData.personal.name}
             </span>
@@ -56,12 +62,10 @@ const Navbar = ({ setPage }) => {
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
               return (
-                <li
-                  key={link.id}
-                  onClick={() => handleNavClick(link.id)}
-                  className="cursor-pointer"
-                >
-                  <div
+                <li key={link.id}>
+                  <button
+                    type="button"
+                    onClick={() => handleNavClick(link.id)}
                     className={`px-4 py-2 rounded-full transition-all duration-300 text-sm
                     ${
                       isActive
@@ -70,7 +74,7 @@ const Navbar = ({ setPage }) => {
                     }`}
                   >
                     {link.label}
-                  </div>
+                  </button>
                 </li>
               );
             })}
@@ -79,6 +83,7 @@ const Navbar = ({ setPage }) => {
           {/* Desktop Hire */}
           <div className="hidden md:block">
             <button
+              type="button"
               onClick={() => handleNavClick("contact")}
               className="px-6 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/40"
             >
@@ -119,12 +124,14 @@ const Navbar = ({ setPage }) => {
         {/* Nav Links */}
         <ul className="flex flex-col items-start px-6 gap-6">
           {navLinks.map((link) => (
-            <li
-              key={link.id}
-              onClick={() => handleNavClick(link.id)}
-              className="text-white text-lg hover:text-blue-400 transition cursor-pointer"
-            >
-              {link.label}
+            <li key={link.id}>
+              <button
+                type="button"
+                onClick={() => handleNavClick(link.id)}
+                className="text-white text-lg hover:text-blue-400 transition cursor-pointer"
+              >
+                {link.label}
+              </button>
             </li>
           ))}
         </ul>
@@ -132,6 +139,7 @@ const Navbar = ({ setPage }) => {
         {/* Hire Button */}
         <div className="px-6 mt-8">
           <button
+            type="button"
             onClick={() => handleNavClick("contact")}
             className="w-full py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition"
           >

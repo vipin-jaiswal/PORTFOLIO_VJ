@@ -12,13 +12,13 @@ export const siteData = {
   personal: {
     name: "Vipin Jaiswal",
     shortName: "Vipin",
-    title: "Full Stack Developer",
-    subtitle: "Full Stack Developer & UI/UX Designer",
+    title: "AI Engineer & Full Stack Developer",
+    subtitle: "B.Tech CSE (AI) | Specialist in Intelligent Systems",
     email: "vipin78040@gmail.com",
-    location: "Near Rungta College of Engineering and Technology, Bhilai (C.G.)",
-    statusText: "Available for Projects",
-    profileImageAlt: "Vipin Jaiswal",
-    logoAlt: "VJ Logo",
+    location: "Bhilai, CG, India", // Simplified for cleaner UI
+    statusText: "Open for innovative projects",
+    profileImageAlt: "Vipin Jaiswal - AI & Full Stack Developer",
+    logoAlt: "VJ Portfolio Logo",
     resumePath: resumeFile,
   },
 
@@ -26,141 +26,135 @@ export const siteData = {
     links: [
       { id: "home", label: "Home" },
       { id: "about", label: "About" },
-      { id: "services", label: "Services" },
-      { id: "projects", label: "Projects" },
+      { id: "services", label: "Expertise" },
+      { id: "projects", label: "Work" },
       { id: "contact", label: "Contact" },
     ],
-    hireButtonText: "Hire Me",
+    hireButtonText: "Let's Talk",
   },
 
   home: {
-    greeting: "Hello There, Welcome to my site",
+    greeting: "Empowering Ideas with Code & Intelligence",
     description:
-      "I build interactive, high-performance websites and applications with scalable architecture and modern UI systems.",
-    resumeButtonText: "See Resume",
-    hireButtonText: "Hire Me",
+      "I bridge the gap between complex Machine Learning models and seamless user experiences through high-performance Full Stack development.",
+    resumeButtonText: "See CV",
+    hireButtonText: "Work With Me",
   },
 
   about: {
-    heading: "About",
-    headingHighlight: "Me",
+    heading: "My",
+    headingHighlight: "Story",
     intro:
-      "I am Vipin Jaiswal, a passionate Full Stack Developer and AI Researcher dedicated to building scalable, intelligent, and high-performance digital products.",
+      "I am a Computer Science Engineer specializing in AI, driven by the challenge of transforming complex data into intelligent, scalable systems. I don't just build applications; I engineer solutions that learn, adapt, and evolve.",
     details:
-      "I specialize in combining modern frontend technologies with powerful backend architectures and machine learning workflows. From designing responsive interfaces to developing secure APIs and deploying AI-powered applications.",
-    skillsHeading: "Core",
-    skillsHeadingHighlight: "Skills",
+      "My expertise sits at the intersection of Deep Learning and Modern Web Architecture. Whether I'm training Convolutional Neural Networks for computer vision or architecting robust MERN stack ecosystems, my focus remains constant: delivering high-performance, secure, and user-centric digital products.",
+    skillsHeading: "Technical",
+    skillsHeadingHighlight: "Arsenal",
     skillCards: [
       {
+        icon: "BrainCircuit",
+        title: "Artificial Intelligence",
+        desc: "Designing intelligent systems using Computer Vision, Predictive Modeling, and RAG architectures.",
+        tools: ["TensorFlow", "Scikit-Learn", "CNN", "OpenCV"],
+      },
+      {
         icon: "Code2",
-        title: "Frontend Development",
-        desc: "Building modern, scalable and responsive user interfaces.",
-        tools: ["React", "Next.js", "Tailwind CSS", "Responsive Design"],
+        title: "Frontend Engineering",
+        desc: "Developing high-fidelity, responsive interfaces with a focus on performance and state management.",
+        tools: ["React.js", "Next.js", "Tailwind CSS", "Redux"],
       },
       {
         icon: "Database",
-        title: "Backend Systems",
-        desc: "Designing secure and high-performance server architectures.",
-        tools: ["Node.js", "Express.js", "MongoDB", "REST APIs"],
+        title: "Backend & Cloud",
+        desc: "Architecting secure server-side logic and managing high-availability database systems.",
+        tools: ["Node.js", "Express", "MongoDB", "Python (FastAPI)"],
       },
       {
-        icon: "BrainCircuit",
-        title: "AI Engineering",
-        desc: "Developing intelligent automation and AI-driven solutions.",
-        tools: ["RAG Systems", "Vector Databases", "NLP", "TensorFlow"],
-      },
-      {
-        icon: "Globe",
-        title: "Full Stack Architecture",
-        desc: "Creating scalable and production-ready systems.",
-        tools: [
-          "System Design",
-          "Performance Optimization",
-          "Deployment",
-          "Clean Code",
-        ],
+        icon: "Terminal",
+        title: "Core Engineering",
+        desc: "Optimizing code through robust Data Structures, Algorithms, and streamlined version control.",
+        tools: ["Java", "Python", "Git", "RESTful APIs"],
       },
     ],
   },
 
   services: {
-    heading: "My",
-    headingHighlight: "Services",
-    description: "Explore what I can build for you ->",
+    heading: "Core",
+    headingHighlight: "Expertise",
+    description: "Solving complex problems with modern technology stacks.",
     items: [
-      { icon: "Brain", title: "AI Web Apps" },
-      { icon: "Cpu", title: "Machine Learning" },
-      { icon: "Code2", title: "Frontend Development" },
-      { icon: "Database", title: "Backend Development" },
-      { icon: "Globe", title: "Full Stack Apps" },
-      { icon: "Palette", title: "UI / UX Design" },
-      { icon: "LayoutDashboard", title: "Admin Dashboards" },
-      { icon: "Smartphone", title: "Responsive Design" },
-      { icon: "Cloud", title: "Cloud Deployment" },
-      { icon: "Rocket", title: "Performance Optimization" },
-      { icon: "ShieldCheck", title: "Web Security" },
-      { icon: "GitBranch", title: "Version Control" },
+      { icon: "Cpu", title: "Custom AI Solutions" },
+      { icon: "Layers", title: "Full Stack Web Apps" },
+      { icon: "Search", title: "RAG & LLM Integration" },
+      { icon: "Workflow", title: "Automation Scripts" },
+      { icon: "Smartphone", title: "Responsive UI/UX" },
+      { icon: "Shield", title: "Secure API Development" },
+      { icon: "Server", title: "Database Architecture" },
+      { icon: "Zap", title: "Performance Tuning" },
     ],
   },
 
   projects: {
-    heading: "MY",
-    headingHighlight: "PROJECTS",
+    heading: "My",
+    headingHighlight: "Projects",
+
     github: {
       username: "vipin-jaiswal",
-      selectedRepos: ["AI-INVOICE-GENRETOR", "Multiple-Disease-Prediction"],
+      selectedRepos: [
+        "multiple-disease-prediction",
+        "bird-classification",
+        "plant-disease-detection"
+      ]
     },
+
     loadingText: "Loading projects...",
-    errorText: "Failed to load projects. Please try again later.",
-    emptyDescription: "No description available.",
-    ctaText: "View on GitHub ->",
+    errorText: "Failed to load projects",
+    emptyDescription: "No description available",
+    ctaText: "View Project"
   },
 
   contact: {
-    heading: "Let's Connect",
-    subText: "Drop your message below.",
+    heading: "Start a",
+    headingHighlight: "Project",
+    subText: "Have a vision? Let’s build it together.",
     placeholders: {
-      name: "Your Name",
-      email: "Your Email",
-      message: "Your Message",
+      name: "Full Name",
+      email: "Email Address",
+      message: "Tell me about your project...",
     },
-    buttonText: "Send Message",
+    buttonText: "Launch Inquiry",
   },
 
   footer: {
     brandDescription:
-      "Full Stack Developer & AI Engineer building scalable web and intelligent systems.",
+      "Innovating at the intersection of AI and Web Development. Let's build the future, one commit at a time.",
     sections: {
       navigation: {
-        title: "Navigation",
+        title: "Sitemap",
         links: [
-          { label: "About", href: "#about" },
-          { label: "Skills", href: "#skills" },
-          { label: "Projects", href: "#projects" },
+          { label: "Home", href: "#home" },
+          { label: "Expertise", href: "#services" },
+          { label: "Portfolio", href: "#projects" },
           { label: "Contact", href: "#contact" },
         ],
       },
-      services: {
-        title: "Services",
+      specialties: {
+        title: "Specialties",
         items: [
-          "Full Stack Development",
-          "AI / RAG Systems",
-          "UI/UX Design",
-          "Technical Consulting",
+          "Deep Learning",
+          "MERN Stack",
+          "UI/UX Implementation",
+          "Intelligent Automation",
         ],
       },
-      resources: {
-        title: "Resources",
-        items: ["Case Studies", "Open Source", "Blog (Coming Soon)", "Privacy Policy"],
-      },
     },
-    legalLinks: ["Privacy", "Terms", "Code of Conduct"],
+    legalLinks: ["Privacy Policy", "Terms of Service"],
   },
 
   social: {
-    github: "",
-    linkedin: "",
-    twitter: "",
+    github: "https://github.com/vipin-jaiswal",
+    linkedin: "https://linkedin.com/in/vipin-jaiswal", 
+    twitter: "https://twitter.com/vipin_jaiswal",
     mail: "mailto:vipin78040@gmail.com",
   },
 };

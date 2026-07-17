@@ -3,7 +3,7 @@ const router = express.Router();
 
 const {
   sendContactEmail,
-} = require("../controllers/contactController");
+} = require("../controllers/contactcontroller");
 
 // POST /api/contact
 router.post("/", sendContactEmail);

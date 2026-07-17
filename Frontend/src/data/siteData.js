@@ -186,8 +186,7 @@ export const siteData = {
 
   social: {
     github: "https://github.com/vipin-jaiswal",
-    linkedin: "https://linkedin.com/in/vipin-jaiswal", 
-    twitter: "https://twitter.com/vipin_jaiswal",
+    linkedin: "https://linkedin.com/in/vipin-jaiswal",
     mail: "mailto:vipin78040@gmail.com",
   },
 };

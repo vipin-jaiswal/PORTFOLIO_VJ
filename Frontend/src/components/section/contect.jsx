@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Send, Mail, CheckCircle, XCircle, Loader } from "lucide-react";
-import { siteData } from "../../data/siteData";
+import { siteData } from "../../data/siteData.js";
 
 const Contect = () => {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
@@ -13,8 +13,6 @@ const Contect = () => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
-
-  const API_URL = "http://localhost:5000/api/contact"; // Your backend API endpoint
 
   // Mouse Follow Glow
   useEffect(() => {
@@ -47,7 +45,7 @@ const Contect = () => {
     setStatus({ loading: true, error: null, success: null });
 
     try {
-      const response = await fetch(API_URL, {
+      const response = await fetch(import.meta.env.VITE_API_URL, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),

@@ -35,6 +35,10 @@ const Home = () => {
     }
   };
 
+  const handleCVClick = () => {
+    document.getElementById("cv")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <section
       id="home"
@@ -72,23 +76,22 @@ const Home = () => {
 
           <h2 className="text-2xl md:text-4xl font-bold text-gray-300">
             <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
-              {siteData.personal.subtitle}
+              {siteData.personal.cvHeadline}
             </span>
           </h2>
 
           <p className="text-gray-400 max-w-xl text-base md:text-lg leading-relaxed">
-            {siteData.home.description}
+            {siteData.personal.cvSummary}
           </p>
 
           <div className="hidden md:flex items-center gap-20 pt-12">
-            <a
-              href={siteData.personal.resumePath}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={handleCVClick}
               className="px-8 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all duration-300 shadow-lg hover:shadow-blue-500/30 flex items-center gap-2"
             >
               {siteData.home.resumeButtonText} <ArrowRight size={18} />
-            </a>
+            </button>
 
             <div className="relative flex items-center gap-6">
               <button

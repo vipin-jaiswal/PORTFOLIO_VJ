@@ -108,6 +108,12 @@
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 3;
         overflow: hidden;
+    }
+    .line-clamp-4 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        overflow: hidden;
     }   
 
  .scrollbar-hide::-webkit-scrollbar {
@@ -118,7 +124,18 @@
   scrollbar-width: none;
 }
 
- 
+ /* Marquee Animation */
+ @keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
 
+.project-marquee-track {
+  animation: marquee 60s linear infinite;
+}
 
 }

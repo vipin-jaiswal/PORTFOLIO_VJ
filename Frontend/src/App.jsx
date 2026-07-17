@@ -4,6 +4,7 @@ import Hero from "./components/section/Home";
 import About from "./components/section/About";
 import Service from "./components/section/Services";
 import Project from "./components/section/Project";
+import CV from "./components/section/CV";
 import Contect from "./components/section/contect";
 import Footer from "./components/layout/Footer";
 
@@ -28,6 +29,8 @@ function App() {
         <section id="projects">
           <Project />
         </section>
+
+        <CV />
 
         <section id="contact">
           <Contect />

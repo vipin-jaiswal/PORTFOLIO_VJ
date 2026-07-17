@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { siteData } from "../../data/siteData";
 
 const username = siteData.projects.github.username;
-const selectedProjects = siteData.projects.github.selectedRepos;
+const selectedRepos = siteData.projects.github.selectedRepos;
 
 const Projects = () => {
   const [repos, setRepos] = useState([]);
@@ -33,35 +33,36 @@ const Projects = () => {
   }, [lightOn]);
 
   useEffect(() => {
+    const controller = new AbortController();
+
     const fetchRepos = async () => {
       try {
-        const responses = await Promise.all(
-          selectedProjects.map((repo) =>
-            fetch(`https://api.github.com/repos/${username}/${repo}`)
-          )
+        const response = await fetch(
+          `https://api.github.com/users/${username}/repos?sort=updated&per_page=100`,
+          { signal: controller.signal }
         );
+        if (!response.ok) {
+          throw new Error("Failed to fetch repositories");
+        }
+        const allRepos = await response.json();
 
-        const data = await Promise.all(
-          responses.map((res) => {
-            if (!res.ok) throw new Error("Failed to fetch repository");
-            return res.json();
-          })
-        );
+        const visibleRepos = allRepos.filter((repo) => !repo.fork && !repo.archived);
+        const reposToShow = selectedRepos.length
+          ? visibleRepos.filter((repo) => selectedRepos.includes(repo.name))
+          : visibleRepos;
 
-        const sortedRepos = data.sort(
-          (a, b) => b.stargazers_count - a.stargazers_count
-        );
-
-        setRepos(sortedRepos);
+        setRepos(reposToShow);
       } catch (err) {
+        if (err.name === "AbortError") return;
         console.error(err);
         setError(siteData.projects.errorText);
       } finally {
-        setLoading(false);
+        if (!controller.signal.aborted) setLoading(false);
       }
     };
 
     fetchRepos();
+    return () => controller.abort();
   }, []);
 
   return (
@@ -118,15 +119,21 @@ const Projects = () => {
           </div>
         )}
 
-        {/* Projects Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
+        {/* Infinite projects marquee */}
+        <div className="marquee-mask overflow-hidden py-6">
           {!loading &&
             !error &&
-            repos.map((repo) => (
+            repos.length > 0 && (
+              <div className="marquee-track project-marquee-track flex w-max gap-6 hover:[animation-play-state:paused] focus-within:[animation-play-state:paused]">
+              {[...repos, ...repos].map((repo, index) => {
+                const isDuplicate = index >= repos.length;
+
+                return (
               <div
-                key={repo.id}
+                key={`${repo.id}-${index}`}
+                aria-hidden={isDuplicate}
                 className="group bg-slate-900 border border-slate-800 
-                p-8 rounded-3xl transition-all duration-300 
+                p-8 rounded-3xl w-80 transition-all duration-300 
                 hover:-translate-y-2 hover:border-blue-500 
                 hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]"
               >
@@ -134,7 +141,7 @@ const Projects = () => {
                   {repo.name.replace(/[-_]/g, " ")}
                 </h3>
 
-                <p className="text-gray-400 mb-6 min-h-15">
+                <p className="text-gray-400 mb-6 h-24 line-clamp-4">
                   {repo.description || siteData.projects.emptyDescription}
                 </p>
 
@@ -154,13 +161,17 @@ const Projects = () => {
                   href={repo.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
+                  tabIndex={isDuplicate ? -1 : undefined}
                   className="inline-block px-6 py-2 bg-blue-600 hover:bg-blue-700 
                   text-white rounded-full transition duration-300"
                 >
                   {siteData.projects.ctaText}
                 </a>
               </div>
-            ))}
+                );
+              })}
+              </div>
+            )}
         </div>
       </div>
     </section>

@@ -103,8 +103,8 @@ const Navbar = ({ setPage }) => {
 
       {/* Mobile Floating Drawer */}
       <div
-        className={`fixed top-24 right-4 w-72 h-105
-        bg-white/5 backdrop-blur-xl border border-white/10
+        className={`fixed top-24 right-4 w-72 pb-8
+        bg-slate-900/80 backdrop-blur-xl border border-slate-700
         rounded-3xl shadow-2xl z-50
         transform transition-all duration-500 ease-in-out md:hidden
         ${

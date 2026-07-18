@@ -46,7 +46,13 @@ const Contect = () => {
 
     try {
       const { name, email, message } = formData;
-      const API_URL = import.meta.env.VITE_API_URL;
+      // Remove any trailing slashes to prevent redirect issues.
+      const API_URL = import.meta.env.VITE_API_URL.replace(/\/+$/, "");
+
+      // for debugging
+      console.log("API_URL:", API_URL);
+      console.log("Final URL:", `${API_URL}/api/contact`);
+
       const response = await fetch(`${API_URL}/api/contact`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },

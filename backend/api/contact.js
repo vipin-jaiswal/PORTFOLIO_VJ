@@ -1,22 +1,27 @@
-const express = require("express");
-const cors = require("cors");
 const { Resend } = require("resend");
 const { personal } = require("../config/siteData");
 
-const app = express();
-
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-app.use(cors({
-  origin: [
-    "https://vipinjaiswal.site",
-    "https://www.vipinjaiswal.site",
-  ],
-}));
+module.exports = async (req, res) => {
+  // CORS
+  res.setHeader("Access-Control-Allow-Origin", "https://vipinjaiswal.site");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-app.use(express.json());
+  // Handle preflight request
+  if (req.method === "OPTIONS") {
+    return res.status(200).end();
+  }
 
-app.post("/api/contact", async (req, res) => {
+  // Only allow POST
+  if (req.method !== "POST") {
+    return res.status(405).json({
+      success: false,
+      message: "Method Not Allowed",
+    });
+  }
+
   try {
     const { name, email, message } = req.body;
 
@@ -27,44 +32,36 @@ app.post("/api/contact", async (req, res) => {
       });
     }
 
-    // Mail to you
+    // Send email to you
     await resend.emails.send({
-      from: "Portfolio <contact@send.vipinjaiswal.site>",
+      from: "Portfolio <contact@vipinjaiswal.site>",
       to: personal.email,
       replyTo: email,
       subject: `📩 New Portfolio Contact - ${name}`,
       html: `
         <h2>New Portfolio Contact</h2>
-
-        <p><b>Name:</b> ${name}</p>
-
-        <p><b>Email:</b> ${email}</p>
-
-        <p><b>Message:</b></p>
-
+        <p><strong>Name:</strong> ${name}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,
     });
 
     // Auto reply
     await resend.emails.send({
-      from: "Vipin Jaiswal <contact@send.vipinjaiswal.site>",
+      from: "Vipin Jaiswal <contact@vipinjaiswal.site>",
       to: email,
-      subject: "Thanks for contacting me",
+      subject: "Thank you for contacting me",
       html: `
         <h2>Hello ${name},</h2>
-
         <p>Thank you for contacting me.</p>
-
         <p>I have received your message and will reply soon.</p>
-
         <br>
-
-        Vipin Jaiswal
+        <p>Regards,<br><strong>Vipin Jaiswal</strong></p>
       `,
     });
 
-    return res.json({
+    return res.status(200).json({
       success: true,
       message: "Message sent successfully.",
     });
@@ -77,6 +74,4 @@ app.post("/api/contact", async (req, res) => {
       message: error.message,
     });
   }
-});
-
-module.exports = app;
+};

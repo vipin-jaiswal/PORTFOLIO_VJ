@@ -7,12 +7,15 @@ const contactRoutes = require("./routes/contactRoutes");
 
 const app = express();
 
-// Middleware
 app.use(cors());
+
 app.use(express.json());
+
 app.use(express.urlencoded({ extended: true }));
 
-// Home Route
+console.log("EMAIL_USER:", process.env.EMAIL_USER);
+console.log("EMAIL_PASS exists:", !!process.env.EMAIL_PASS);
+
 app.get("/", (req, res) => {
   res.json({
     success: true,
@@ -20,10 +23,8 @@ app.get("/", (req, res) => {
   });
 });
 
-// Contact API
 app.use("/api/contact", contactRoutes);
 
-// 404 Handler
 app.use((req, res) => {
   res.status(404).json({
     success: false,

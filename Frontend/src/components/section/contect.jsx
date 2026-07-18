@@ -54,7 +54,7 @@ const Contect = () => {
           name,
           email,
           message,
-        }),
+        }), 
       });
 
       const result = await response.json();

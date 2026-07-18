@@ -1,16 +1,17 @@
 const express = require("express");
 const cors = require("cors");
-const transporter = require("../config/mail");
+const { Resend } = require("resend");
 const { personal } = require("../config/siteData");
 
 const app = express();
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 app.use(cors({
   origin: [
     "https://vipinjaiswal.site",
-    "https://www.vipinjaiswal.site"
+    "https://www.vipinjaiswal.site",
   ],
-  methods: ["POST", "OPTIONS"],
 }));
 
 app.use(express.json());
@@ -27,11 +28,11 @@ app.post("/api/contact", async (req, res) => {
     }
 
     // Mail to you
-    await transporter.sendMail({
-      from: `"Portfolio Contact" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: "Portfolio <contact@send.vipinjaiswal.site>",
       to: personal.email,
       replyTo: email,
-      subject: `📩 New Contact from ${name}`,
+      subject: `📩 New Portfolio Contact - ${name}`,
       html: `
         <h2>New Portfolio Contact</h2>
 
@@ -41,28 +42,25 @@ app.post("/api/contact", async (req, res) => {
 
         <p><b>Message:</b></p>
 
-        <div style="padding:15px;background:#f5f5f5">
-        ${message}
-        </div>
+        <p>${message}</p>
       `,
     });
 
     // Auto reply
-    await transporter.sendMail({
-      from: `"Vipin Jaiswal" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+      from: "Vipin Jaiswal <contact@send.vipinjaiswal.site>",
       to: email,
       subject: "Thanks for contacting me",
       html: `
-      <h2>Hello ${name},</h2>
+        <h2>Hello ${name},</h2>
 
-      <p>
-      Thank you for contacting me.
-      I have received your message and will reply soon.
-      </p>
+        <p>Thank you for contacting me.</p>
 
-      <br>
+        <p>I have received your message and will reply soon.</p>
 
-      <b>Vipin Jaiswal</b>
+        <br>
+
+        Vipin Jaiswal
       `,
     });
 
@@ -71,12 +69,12 @@ app.post("/api/contact", async (req, res) => {
       message: "Message sent successfully.",
     });
 
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    console.error(error);
 
     return res.status(500).json({
       success: false,
-      message: err.message,
+      message: error.message,
     });
   }
 });

@@ -44,7 +44,7 @@ const Home = () => {
       id="home"
       className="relative pt-32 pb-24 bg-slate-950 overflow-hidden min-h-screen"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-blue-950" />
+      <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-slate-950 to-blue-950" />
 
       <div
         className="absolute inset-0 z-0
@@ -75,7 +75,7 @@ const Home = () => {
           </h1>
 
           <h2 className="text-2xl md:text-4xl font-bold text-gray-300">
-            <span className="bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
               {siteData.personal.cvHeadline}
             </span>
           </h2>

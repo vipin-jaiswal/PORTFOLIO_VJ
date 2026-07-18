@@ -3,9 +3,17 @@ const { personal } = require("../config/siteData");
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const ALLOWED_ORIGINS = [
+  "https://vipinjaiswal.site",
+  "https://www.vipinjaiswal.site",
+];
+
 module.exports = async (req, res) => {
-  // CORS
-  res.setHeader("Access-Control-Allow-Origin", "https://vipinjaiswal.site");
+  // CORS - reflect the request origin only if it's in the allowed list
+  const origin = req.headers.origin;
+  if (ALLOWED_ORIGINS.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
